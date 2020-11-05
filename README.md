@@ -118,13 +118,13 @@ Cuando un conjunto de usuarios consulta un enésimo número (superior a 1000000)
 4. Adjunte tabla de tiempos e interprete por qué la función tarda tando tiempo. _La función tarda tanto tiempo debido a que tiene una CPU y una memoria muy limitada, además de ello la aplicación no esta construida de manera óptima._
 
 
-![alt text](https://raw.githubusercontent.com/angiedanielar/LAB8_ARSW/master/images/1.png)
+![alt text](https://raw.githubusercontent.com/angiedanielar/LAB8_ARSW/main/images/1.png)
 
 
 5. Adjunte imágen del consumo de CPU de la VM e interprete por qué la función consume esa cantidad de CPU. _La función consume esa cantidad de CPU debido a que la aplicación no esta construida de manera óptima, por ende consume una cantiad elevada de recursos._
 
 
-![alt text](https://raw.githubusercontent.com/angiedanielar/LAB8_ARSW/master/images/2.png)
+![alt text](https://raw.githubusercontent.com/angiedanielar/LAB8_ARSW/main/images/2.png)
 
 
 6. Adjunte la imagen del resumen de la ejecución de Postman. Interprete:
@@ -132,7 +132,7 @@ Cuando un conjunto de usuarios consulta un enésimo número (superior a 1000000)
     * Si hubo fallos documentelos y explique. - 5 fallos iguales.
     
     
-    ![alt text](https://raw.githubusercontent.com/angiedanielar/LAB2_ARSW/master/img/3.png)
+    ![alt text](https://raw.githubusercontent.com/angiedanielar/LAB8_ARSW/main/images/3.png)
     
     
     * _Fallo1: Error al momento de la conexión, debido a que ésta se reinció._
