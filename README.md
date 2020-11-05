@@ -1,3 +1,10 @@
+# LAB7_ARSW 🚀
+**_Integrantes:_**
+
+
+* _Angie Daniela Ruiz Alfonso_
+* _Juan Sebastian Díaz Salamanca_ 
+
 ### Escuela Colombiana de Ingeniería
 ### Arquitecturas de Software - ARSW
 
@@ -49,16 +56,16 @@ Cuando un conjunto de usuarios consulta un enésimo número (superior a 1000000)
 ![](images/part1/part1-vm-3000InboudRule.png)
 
 7. La función que calcula en enésimo número de la secuencia de Fibonacci está muy mal construido y consume bastante CPU para obtener la respuesta. Usando la consola del Browser documente los tiempos de respuesta para dicho endpoint usando los siguintes valores:
-    * 1000000
-    * 1010000
-    * 1020000
-    * 1030000
-    * 1040000
-    * 1050000
-    * 1060000
-    * 1070000
-    * 1080000
-    * 1090000    
+    * 1000000 - tiempo: 23 segundos.
+    * 1010000 - tiempo: 23.39 segundos.
+    * 1020000 - tiempo: 24.16 segundos.
+    * 1030000 - tiempo: 24.51 segundos.
+    * 1040000 - tiempo: 25.46 segundos.
+    * 1050000 - tiempo: 26.13 segundos.
+    * 1060000 - tiempo: 26.71 segundos.
+    * 1070000 - tiempo: 27.10 segundos.
+    * 1080000 - tiempo: 27.82 segundos.
+    * 1090000 - tiempo: 28.74 segundos.
 
 8. Dírijase ahora a Azure y verifique el consumo de CPU para la VM. (Los resultados pueden tardar 5 minutos en aparecer).
 
@@ -80,24 +87,80 @@ Cuando un conjunto de usuarios consulta un enésimo número (superior a 1000000)
 ![Imágen 3](images/part1/part1-vm-resize.png)
 
 11. Una vez el cambio se vea reflejado, repita el paso 7, 8 y 9.
-12. Evalue el escenario de calidad asociado al requerimiento no funcional de escalabilidad y concluya si usando este modelo de escalabilidad logramos cumplirlo.
+
+    * 1000000 - el tiempo anterior de 23 segundos pasó a 20.90 segundos ahora.
+    * 1010000 - el tiempo anterior de 23.39 segundos pasó a 20.70 segundos ahora.
+    * 1020000 - el tiempo anterior de 24.16 segundos pasó a 21.65 segundos ahora.
+    * 1030000 - el tiempo anterior de 24.51 segundos pasó a 22.03 segundos ahora.
+    * 1040000 - el tiempo anterior de 25.46 segundos pasó a 21.82 segundos ahora.
+    * 1050000 - el tiempo anterior de 26.13 segundos pasó a 22.36 segundos ahora.
+    * 1060000 - el tiempo anterior de 26.71 segundos pasó a 21.63 segundos ahora.
+    * 1070000 - el tiempo anterior de 27.10 segundos pasó a 23.08 segundos ahora.
+    * 1080000 - el tiempo anterior de 27.82 segundos pasó a 23.29 segundos ahora.
+    * 1090000 - el tiempo anterior de 28.74 segundos pasó a 23.48 segundos ahora.
+
+12. Evalue el escenario de calidad asociado al requerimiento no funcional de escalabilidad y concluya si usando este modelo de escalabilidad logramos cumplirlo. _Rta: Sí se cumple, este hace un mayor consumo de CPU pero realiza el trabajo de manera más rápida._
+
+
 13. Vuelva a dejar la VM en el tamaño inicial para evitar cobros adicionales.
 
 **Preguntas**
 
-1. ¿Cuántos y cuáles recursos crea Azure junto con la VM?
-2. ¿Brevemente describa para qué sirve cada recurso?
-3. ¿Al cerrar la conexión ssh con la VM, por qué se cae la aplicación que ejecutamos con el comando `npm FibonacciApp.js`? ¿Por qué debemos crear un *Inbound port rule* antes de acceder al servicio?
-4. Adjunte tabla de tiempos e interprete por qué la función tarda tando tiempo.
-5. Adjunte imágen del consumo de CPU de la VM e interprete por qué la función consume esa cantidad de CPU.
+1. ¿Cuántos y cuáles recursos crea Azure junto con la VM? _Creó 3 recursos, los cuales son: la máquina virtual, un grupo encargado de la seguridad de red y un grupo encargado de los recursos._
+
+
+2. ¿Brevemente describa para qué sirve cada recurso? _La máquina nos sirve para trabajar sobre el sistema operativo Linux externo. El grupo de seguridad de red nos sirve para el manejo del control de las reglas de seguridad de entrada y salida de la máquina, también para el manejo de las subredes y las interfaces de red que ésta pueda tener. Y el grupo de recursos nos sirve para la administración de todos los recursos que tenemos a nuestra disposición._
+
+
+3. ¿Al cerrar la conexión ssh con la VM, por qué se cae la aplicación que ejecutamos con el comando `npm FibonacciApp.js`? _Esto se debe a que ya no hay conexión con la máquina que nos esta brindando este servicio._ ¿Por qué debemos crear un *Inbound port rule* antes de acceder al servicio? _Debemos crear ésta porque por defecto la máquina solo tiene acceso externo a los puertos 22 y 80, y este servicio corre por el puerto 3000._
+
+
+4. Adjunte tabla de tiempos e interprete por qué la función tarda tando tiempo. _La función tarda tanto tiempo debido a que tiene una CPU y una memoria muy limitada, además de ello la aplicación no esta construida de manera óptima._
+
+
+![alt text](https://raw.githubusercontent.com/angiedanielar/LAB8_ARSW/master/images/1.png)
+
+
+5. Adjunte imágen del consumo de CPU de la VM e interprete por qué la función consume esa cantidad de CPU. _La función consume esa cantidad de CPU debido a que la aplicación no esta construida de manera óptima, por ende consume una cantiad elevada de recursos._
+
+
+![alt text](https://raw.githubusercontent.com/angiedanielar/LAB8_ARSW/master/images/2.png)
+
+
 6. Adjunte la imagen del resumen de la ejecución de Postman. Interprete:
-    * Tiempos de ejecución de cada petición.
-    * Si hubo fallos documentelos y explique.
-7. ¿Cuál es la diferencia entre los tamaños `B2ms` y `B1ls` (no solo busque especificaciones de infraestructura)?
-8. ¿Aumentar el tamaño de la VM es una buena solución en este escenario?, ¿Qué pasa con la FibonacciApp cuando cambiamos el tamaño de la VM?
-9. ¿Qué pasa con la infraestructura cuando cambia el tamaño de la VM? ¿Qué efectos negativos implica?
-10. ¿Hubo mejora en el consumo de CPU o en los tiempos de respuesta? Si/No ¿Por qué?
-11. Aumente la cantidad de ejecuciones paralelas del comando de postman a `4`. ¿El comportamiento del sistema es porcentualmente mejor?
+    * Tiempos de ejecución de cada petición. - 19 segundos. 
+    * Si hubo fallos documentelos y explique. - 5 fallos iguales.
+    
+    
+    ![alt text](https://raw.githubusercontent.com/angiedanielar/LAB2_ARSW/master/img/3.png)
+    
+    
+    * _Fallo1: Error al momento de la conexión, debido a que ésta se reinció._
+    * _Fallo2: Error al momento de la conexión, debido a que ésta se reinció._
+    * _Fallo3: Error al momento de la conexión, debido a que ésta se reinció._
+    * _Fallo4: Error al momento de la conexión, debido a que ésta se reinció._
+    * _Fallo5: Error al momento de la conexión, debido a que ésta se reinció._
+    
+    
+7. ¿Cuál es la diferencia entre los tamaños `B2ms` y `B1ls` (no solo busque especificaciones de infraestructura)? _Las diferencias entre B2ms y B1ls son:._
+
+   * La CPU. 
+   * La RAM.
+   * La velocidad de transmisión de datos por segundo.
+   * **Éstas anteriores pueden afectar de manera significativa el desempeño de la máquina virtual.**
+   * El precio del uso de la infraestructura de Azure.
+
+
+8. ¿Aumentar el tamaño de la VM es una buena solución en este escenario?, ¿Qué pasa con la FibonacciApp cuando cambiamos el tamaño de la VM? _Si funciona para que la aplicaicón se ejecute de manera más rápida pero no es una buena solución porque el consumo de CPU aumenta a la par._
+
+
+9. ¿Qué pasa con la infraestructura cuando cambia el tamaño de la VM? ¿Qué efectos negativos implica? _La máquina se vuelve más rápida, pero el efecto negativo es el aumento del consumo por parte de la CPU._
+
+
+10. ¿Hubo mejora en el consumo de CPU o en los tiempos de respuesta? Si/No ¿Por qué? _En el consumo de CPU no hubo mejora debido a que en ambos casos se consume bastante CPU. Pero en los tiempos de ejecución si hubo una significativa mejora._
+
+
+11. Aumente la cantidad de ejecuciones paralelas del comando de postman a `4`. ¿El comportamiento del sistema es porcentualmente mejor? _El comportamiento no es porcentualmente mejor, el programa falla totalmente desde el principio._
 
 ### Parte 2 - Escalabilidad horizontal
 
@@ -194,6 +257,9 @@ newman run ARSW_LOAD-BALANCING_AZURE.postman_collection.json -e [ARSW_LOAD-BALAN
 * ¿Cuál es el propósito del *Network Security Group*?
 * Informe de newman 1 (Punto 2)
 * Presente el Diagrama de Despliegue de la solución.
+
+
+
 
 
 
