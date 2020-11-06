@@ -1,4 +1,4 @@
-# LAB7_ARSW 🚀
+# LAB8_ARSW 🚀
 **_Integrantes:_**
 
 
@@ -106,22 +106,22 @@ Cuando un conjunto de usuarios consulta un enésimo número (superior a 1000000)
 
 **Preguntas**
 
-1. ¿Cuántos y cuáles recursos crea Azure junto con la VM? _Creó 3 recursos, los cuales son: la máquina virtual, un grupo encargado de la seguridad de red y un grupo encargado de los recursos._
+1. ¿Cuántos y cuáles recursos crea Azure junto con la VM? _Creó 3 recursos, los cuales son: la máquina virtual, un grupo encargado de la seguridad de red, un grupo encargado de los recursos, una red virtual, una interfaz de red, una dirección IP pública, un disco y una cuenta de almacenamiento para los datos almacenados de Azure._
 
 
-2. ¿Brevemente describa para qué sirve cada recurso? _La máquina nos sirve para trabajar sobre el sistema operativo Linux externo. El grupo de seguridad de red nos sirve para el manejo del control de las reglas de seguridad de entrada y salida de la máquina, también para el manejo de las subredes y las interfaces de red que ésta pueda tener. Y el grupo de recursos nos sirve para la administración de todos los recursos que tenemos a nuestra disposición._
+2. ¿Brevemente describa para qué sirve cada recurso? _La máquina nos sirve para trabajar sobre el sistema operativo Linux externo. El grupo de seguridad de red nos sirve para el manejo del control de las reglas de seguridad de entrada y salida de la máquina. La interfaz de red permite la comunicación de la máquina virtual con Internet y con los recursos locales. El grupo de recursos nos sirve para la administración de todos los recursos que tenemos a nuestra disposición. El disco es el que se encarga del almacenamiento de la máquina virtual. La red virtual nos permite la comunicación entre los recursos de las máquinas virtuales de Azur, como una red común pero con servicios de escalabilidad, disponibilidad y aislamiento. La dirección IP píblica se nos asigna hasta que la máquina se haya eliminado, ésta nos permite que los recursos de azure se comuniquen a través de internet y con los servicios que son publicos en azure, por ejemplo: Interfaces de red de máquinas virtuales, balanceadores de carga orientados a Internet, pasarelas VPN, pasarelas de aplicación y cortafuegos Azure. La cuenta de almacenamiento para los datos almacenados de Azure nos proporciona un espacio de nombres únicos para los datos de Azure Storage y que se pueda acceder a ellos desde cualquier lugar del mundo a través de HTTP o HTTPS, datos que cumplen con alta disponibilidad, seguridad y escalabilidad._
 
 
 3. ¿Al cerrar la conexión ssh con la VM, por qué se cae la aplicación que ejecutamos con el comando `npm FibonacciApp.js`? _Esto se debe a que ya no hay conexión con la máquina que nos esta brindando este servicio._ ¿Por qué debemos crear un *Inbound port rule* antes de acceder al servicio? _Debemos crear ésta porque por defecto la máquina solo tiene acceso externo a los puertos 22 y 80, y este servicio corre por el puerto 3000._
 
 
-4. Adjunte tabla de tiempos e interprete por qué la función tarda tando tiempo. _La función tarda tanto tiempo debido a que tiene una CPU y una memoria muy limitada, además de ello la aplicación no esta construida de manera óptima._
+4. Adjunte tabla de tiempos e interprete por qué la función tarda tando tiempo. _La función tarda tanto tiempo debido a que tiene una CPU y una memoria muy limitada, además de ello la aplicación no esta construida de manera óptima (no aprovecha de manera adecuada los recursos del sistema al estar implementada iterativamente y al no usar más hilos, además de ello realiza cálcuos innecesarios y estos resultados no son almacenados en memoria)._
 
 
 ![alt text](https://raw.githubusercontent.com/angiedanielar/LAB8_ARSW/main/images/1.png)
 
 
-5. Adjunte imágen del consumo de CPU de la VM e interprete por qué la función consume esa cantidad de CPU. _La función consume esa cantidad de CPU debido a que la aplicación no esta construida de manera óptima, por ende consume una cantiad elevada de recursos._
+5. Adjunte imágen del consumo de CPU de la VM e interprete por qué la función consume esa cantidad de CPU. _La función consume esa cantidad de CPU debido a que la aplicación no esta construida de manera óptima (se realizan múltiples cálculos innecesarios, además de no manejar concurrencia), por ende consume una cantiad elevada de recursos._
 
 
 ![alt text](https://raw.githubusercontent.com/angiedanielar/LAB8_ARSW/main/images/2.png)
@@ -129,7 +129,7 @@ Cuando un conjunto de usuarios consulta un enésimo número (superior a 1000000)
 
 6. Adjunte la imagen del resumen de la ejecución de Postman. Interprete:
     * Tiempos de ejecución de cada petición. - 19 segundos. 
-    * Si hubo fallos documentelos y explique. - 5 fallos iguales.
+    * Si hubo fallos documentelos y explique. - 5 fallos iguales, al no soportar concurrencia.
     
     
     ![alt text](https://raw.githubusercontent.com/angiedanielar/LAB8_ARSW/main/images/3.png)
@@ -146,18 +146,20 @@ Cuando un conjunto de usuarios consulta un enésimo número (superior a 1000000)
 
    * La CPU. 
    * La RAM.
+   * Los sistemas operativos que soportan. 
    * La velocidad de transmisión de datos por segundo.
    * **Éstas anteriores pueden afectar de manera significativa el desempeño de la máquina virtual.**
    * El precio del uso de la infraestructura de Azure.
+   * El uso general que se le da.
+ 
+
+8. ¿Aumentar el tamaño de la VM es una buena solución en este escenario?, ¿Qué pasa con la FibonacciApp cuando cambiamos el tamaño de la VM? _Si funciona para que la aplicaicón se ejecute de manera más rápida pero no es una buena solución porque el consumo de CPU aumenta a la par. Además cuando cambiamos el tamaño de la máquina virtual es necesario reiniciarla, por ende se pierde el prinicpio de disponibilidad de la aplicación por lo que esta deja de funcionar mientras se reinicia._
 
 
-8. ¿Aumentar el tamaño de la VM es una buena solución en este escenario?, ¿Qué pasa con la FibonacciApp cuando cambiamos el tamaño de la VM? _Si funciona para que la aplicaicón se ejecute de manera más rápida pero no es una buena solución porque el consumo de CPU aumenta a la par._
+9. ¿Qué pasa con la infraestructura cuando cambia el tamaño de la VM? ¿Qué efectos negativos implica? _La máquina se vuelve más rápida, pero el efecto negativo es el aumento del consumo por parte de la CPU, además de la afectación en el principio de disponibilidad de la aplicación mientras se restablece._
 
 
-9. ¿Qué pasa con la infraestructura cuando cambia el tamaño de la VM? ¿Qué efectos negativos implica? _La máquina se vuelve más rápida, pero el efecto negativo es el aumento del consumo por parte de la CPU._
-
-
-10. ¿Hubo mejora en el consumo de CPU o en los tiempos de respuesta? Si/No ¿Por qué? _En el consumo de CPU no hubo mejora debido a que en ambos casos se consume bastante CPU. Pero en los tiempos de ejecución si hubo una significativa mejora._
+10. ¿Hubo mejora en el consumo de CPU o en los tiempos de respuesta? Si/No ¿Por qué? _En el consumo de CPU no hubo mejora debido a que en ambos casos se consume bastante CPU. Pero en los tiempos de ejecución si hubo mejora pero no significativa._
 
 
 11. Aumente la cantidad de ejecuciones paralelas del comando de postman a `4`. ¿El comportamiento del sistema es porcentualmente mejor? _El comportamiento no es porcentualmente mejor, el programa falla totalmente desde el principio._
